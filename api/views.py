@@ -3,6 +3,7 @@ from .serializers import *
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import *
+from rest_framework import filters
 
 
 #CRUD FOR USER
@@ -33,8 +34,10 @@ class ProductListAPI(generics.ListAPIView):
 class ProductListAPI(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializes
-    filter_backends = (DjangoFilterBackend, )
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, )
     filterset_class = ProductFilter
+    search_fields = ['product_title', 'product_region']
+    ordering_fields = ['product_price', 'product_region']
 
 
 class ProductCreateAPI(generics.CreateAPIView):
