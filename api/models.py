@@ -22,6 +22,7 @@ class Product(models.Model):
     product_title = models.CharField(max_length=250)
     product_description = models.TextField()
     product_price = models.IntegerField()
+    product_region = models.CharField(max_length=250)
     see_later = models.BooleanField(default=False)
     product_user = models.ForeignKey(User, related_name='product', on_delete=models.CASCADE)
 
