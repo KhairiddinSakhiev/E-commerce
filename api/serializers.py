@@ -25,21 +25,21 @@ class OrderSerializes(serializers.ModelSerializer):
 
 
 #SERIALIZER FOR CATEGORY
-class CategorySerializes(generics.ListAPIView):
+class CategorySerializes(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
 
 
 #SERIALIZER FOR RATING
-class RatingSerializes(generics.ListAPIView):
+class RatingSerializes(serializers.ModelSerializer):
     class Meta:
         model = Rating
         fields = '__all__'
 
 
 #SERIALIZER FOR REVIEW
-class ReviewSerializes(generics.ListAPIView):
+class ReviewSerializes(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = '__all__'
