@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .serializers import *
 from rest_framework import generics
-from rest_framework.filters import SearchFilter, OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
+from .filters import *
 
 
 #CRUD FOR USER
@@ -22,10 +23,18 @@ class UserListAPI(generics.ListAPIView):
 
 #CRUD FOR PRODUCT
 class ProductListAPI(generics.ListAPIView):
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = ProductFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+
+
+class ProductListAPI(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializes
-    filter_backends = (SearchFilter, OrderingFilter, )
-    search_fields = ('product_title', 'product_description', 'product_region', )
+    filter_backends = (DjangoFilterBackend, )
+    filterset_class = ProductFilter
 
 
 class ProductCreateAPI(generics.CreateAPIView):
