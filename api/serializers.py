@@ -11,6 +11,12 @@ class UserSerializes(serializers.ModelSerializer):
 
 
 #SERIALIZER FOR PRODUCT
+class ProductListSerializes(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['product_image', 'product_title', 'product_description', 'product_price', 'product_region', 'see_later', 'product_user', 'review', 'rating']
+
+
 class ProductSerializes(serializers.ModelSerializer):
     class Meta:
         model = Product

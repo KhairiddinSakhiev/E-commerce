@@ -24,7 +24,8 @@ class UserListAPI(generics.ListAPIView):
 
 #CRUD FOR PRODUCT
 class ProductListAPI(generics.ListAPIView):
-
+    queryset = Product.objects.all()
+    serializer_class = ProductListSerializes
     def get_queryset(self):
         queryset = super().get_queryset()
         self.filterset = ProductFilter(self.request.GET, queryset=queryset)
@@ -33,17 +34,24 @@ class ProductListAPI(generics.ListAPIView):
 
 class ProductListAPI(generics.ListAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializes
+    serializer_class = ProductListSerializes
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, )
     filterset_class = ProductFilter
     search_fields = ['product_title', 'product_region']
-    ordering_fields = ['product_price', 'product_region']
+
+    # def get_serializer_class(self, *args, **kwargs):
+    #     if self.request.method == 'POST':
+    #         serializer_class = ProductSerializes
+    #     else:
+    #         serializer_class = ProductSerializes
+    #     return serializer_class
+    
 
 
 class ProductCreateAPI(generics.CreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializes
-
+    
 
 class ProductUpdateAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
