@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
-    'api'
+    'api',
+    'faq.apps.FaqConfig',
 ]
 
 MIDDLEWARE = [

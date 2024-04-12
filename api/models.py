@@ -117,35 +117,3 @@ class Order(models.Model):
         return reverse("Order_detail", kwargs={"pk": self.pk})
     
 
-class Question(models.Model):
-
-    question = models.TextField()
-
-    class Meta:
-        verbose_name = ("Question")
-        verbose_name_plural = ("Questions")
-
-    def __str__(self):
-        return self.question
-
-    def get_absolute_url(self):
-        return reverse("Question_detail", kwargs={"pk": self.pk})
-
-
-class Question(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='questions')
-    asker = models.ForeignKey(User, on_delete=models.CASCADE)
-    question = models.CharField(max_length=255)
-    date_asked = models.DateTimeField(auto_now_add=True)
-
-
-    def __str__(self):
-        return self.question
-
-
-class Answer(models.Model):
-    question = models.OneToOneField(Question, on_delete=models.CASCADE, related_name='answer')
-    responder = models.ForeignKey(User, on_delete=models.CASCADE)
-    answer = models.TextField()
-    date_answered = models.DateTimeField(auto_now_add=True)
-    
